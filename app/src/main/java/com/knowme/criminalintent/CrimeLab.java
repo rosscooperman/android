@@ -39,4 +39,8 @@ public class CrimeLab {
     public void addCrime(Crime crime) {
         mCrimes.add(crime);
     }
+
+    public boolean deleteCrime(Crime crime) {
+        return mCrimes.remove(crime);
+    }
 }

@@ -37,6 +37,7 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private Button mTimeButton;
     private CheckBox mSolvedCheckBox;
+    private Button mDeleteButton;
 
     private void updateDate() {
         java.text.DateFormat dateFormatter = DateFormat.getMediumDateFormat(getActivity().getApplicationContext());
@@ -62,6 +63,7 @@ public class CrimeFragment extends Fragment {
         mDateButton = (Button)v.findViewById(R.id.crime_date);
         mTimeButton = (Button)v.findViewById(R.id.crime_time);
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
+        mDeleteButton = (Button)v.findViewById(R.id.delete_crime_button);
 
         mTitleField.setText(mCrime.getTitle());
         mSolvedCheckBox.setChecked(mCrime.isSolved());
@@ -102,6 +104,15 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mCrime.setSolved(isChecked);
+            }
+        });
+
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CrimeLab.get(getActivity()).deleteCrime(mCrime)) {
+                    getActivity().finish();
+                }
             }
         });
 
