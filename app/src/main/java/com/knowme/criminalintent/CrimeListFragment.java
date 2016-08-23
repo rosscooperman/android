@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +26,6 @@ public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
     private int mActiveCrime = -1;
-    private boolean mIsSubtitleVisible;
 
     @Nullable
     @Override
@@ -37,31 +35,19 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView = (RecyclerView)v.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        if (savedInstanceState != null) {
-            mIsSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
-        }
         updateUI();
-
         return v;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mIsSubtitleVisible);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Log.d("foo", "onCreate()");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("foo", "onDestroy()");
     }
 
     @Override
@@ -74,9 +60,6 @@ public class CrimeListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_crime_list, menu);
-
-        MenuItem item = menu.findItem(R.id.menu_item_show_subtitle);
-        item.setTitle(mIsSubtitleVisible ? R.string.hide_subtitle : R.string.show_subtitle);
     }
 
     @Override
@@ -86,12 +69,6 @@ public class CrimeListFragment extends Fragment {
                 editCrime(new Crime());
                 return true;
 
-            case R.id.menu_item_show_subtitle:
-                mIsSubtitleVisible = !mIsSubtitleVisible;
-                getActivity().invalidateOptionsMenu();
-                updateSubtitle();
-                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -99,14 +76,11 @@ public class CrimeListFragment extends Fragment {
 
     private void updateSubtitle() {
         AppCompatActivity activity = (AppCompatActivity)getActivity();
-        if (!mIsSubtitleVisible) {
-            activity.getSupportActionBar().setSubtitle(null);
-            return;
-        }
+        activity.getSupportActionBar().setSubtitle(null);
 
         CrimeLab lab = CrimeLab.get(getActivity());
         int count = lab.getCrimes().size();
-        String subtitle = getString(R.string.subtitle_format, count);
+        String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, count, count);
 
         activity.getSupportActionBar().setSubtitle(subtitle);
     }
