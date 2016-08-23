@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
     private int mActiveCrime = -1;
+    private Button mEmptyStateButton;
 
     @Nullable
     @Override
@@ -33,7 +35,16 @@ public class CrimeListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_crime_list, container, false);
 
         mCrimeRecyclerView = (RecyclerView)v.findViewById(R.id.crime_recycler_view);
+        mEmptyStateButton = (Button)v.findViewById(R.id.crime_list_empty_state_button);
+
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mEmptyStateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editCrime(new Crime());
+            }
+        });
 
         updateUI();
         return v;
@@ -97,6 +108,12 @@ public class CrimeListFragment extends Fragment {
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
+
+        if (crimes.size() > 0) {
+            mEmptyStateButton.setVisibility(View.INVISIBLE);
+        } else {
+            mEmptyStateButton.setVisibility(View.VISIBLE);
+        }
 
         if (mCrimeAdapter == null) {
             mCrimeAdapter = new CrimeAdapter(crimes);

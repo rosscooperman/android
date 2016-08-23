@@ -8,6 +8,7 @@
     <string name="time_picker_title">The time of the crime:</string>
     <string name="new_crime">New Crime</string>
     <string name="crime_delete_button">Delete Crime</string>
+    <string name="crime_list_empty_state">Create Your First Event</string>
     <plurals name="subtitle_plural">
         <item quantity="one">%1$d crime</item>
         <item quantity="other">%1$d crimes</item>
