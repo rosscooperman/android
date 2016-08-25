@@ -1,5 +1,9 @@
 package com.knowme.criminalintent;
 
+import android.content.ContentValues;
+
+import com.knowme.criminalintent.CrimeDbSchema.CrimeTable;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,7 +15,11 @@ public class Crime {
     private boolean mSolved;
 
     public Crime() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id) {
+        mId = id;
         mDate = new Date();
     }
 
@@ -41,5 +49,14 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(CrimeTable.Cols.UUID, getId().toString());
+        values.put(CrimeTable.Cols.TITLE, getTitle());
+        values.put(CrimeTable.Cols.DATE, getDate().getTime());
+        values.put(CrimeTable.Cols.SOLVED, isSolved() ? 1 : 0);
+        return values;
     }
 }
