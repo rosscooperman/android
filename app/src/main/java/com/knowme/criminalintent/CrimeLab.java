@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.knowme.criminalintent.CrimeDbSchema.CrimeTable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,16 +30,41 @@ public class CrimeLab {
         mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
     }
 
-    private Cursor queryCrimes(String whereClause, String[] whereArgs) {
-        return mDatabase.query(CrimeTable.NAME, null, whereClause, whereArgs, null, null, null);
+    private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
+        Cursor cursor = mDatabase.query(CrimeTable.NAME, null, whereClause, whereArgs, null, null, null);
+        return new CrimeCursorWrapper(cursor);
     }
 
     public List<Crime> getCrimes() {
-        return null;
+        List<Crime> crimes = new ArrayList<>();
+        CrimeCursorWrapper cursor = queryCrimes(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                crimes.add(cursor.getCrime());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return crimes;
     }
 
     public Crime getCrime(UUID id) {
-        return null;
+        CrimeCursorWrapper cursor = queryCrimes(CrimeTable.Cols.UUID + " = ?", new String[] { id.toString() });
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getCrime();
+        } finally {
+            cursor.close();
+        }
     }
 
     public void addCrime(Crime crime) {
@@ -53,6 +79,10 @@ public class CrimeLab {
     }
 
     public boolean deleteCrime(Crime crime) {
-        return false;
+        String where = CrimeTable.Cols.UUID + " = ?";
+        String[] whereArgs = new String[] { crime.getId().toString() };
+
+        int count = mDatabase.delete(CrimeTable.NAME, where, whereArgs);
+        return (count >= 1);
     }
 }

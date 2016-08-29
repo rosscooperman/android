@@ -26,7 +26,6 @@ public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
-    private int mActiveCrime = -1;
     private Button mEmptyStateButton;
 
     @Nullable
@@ -118,10 +117,8 @@ public class CrimeListFragment extends Fragment {
         if (mCrimeAdapter == null) {
             mCrimeAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mCrimeAdapter);
-        } else if (mActiveCrime >= 0) {
-            mCrimeAdapter.notifyItemChanged(mActiveCrime);
-            mActiveCrime = -1;
         } else {
+            mCrimeAdapter.setCrimes(crimes);
             mCrimeAdapter.notifyDataSetChanged();
         }
 
@@ -164,7 +161,6 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            mActiveCrime = mListPosition;
             Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
@@ -193,6 +189,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
         }
     }
 }
