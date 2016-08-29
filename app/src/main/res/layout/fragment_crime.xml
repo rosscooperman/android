@@ -21,6 +21,7 @@
         android:text="@string/crime_details_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         style="?android:attr/listSeparatorTextViewStyle"/>
 
     <Button
@@ -47,11 +48,34 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
+    <TextView
+        android:text="@string/crime_actions_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        style="?android:attr/listSeparatorTextViewStyle"/>
+
+    <Button
+        android:id="@+id/choose_suspect_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/crime_choose_suspect_button"/>
+
+    <Button
+        android:id="@+id/send_report_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/crime_send_report_button"/>
+
     <Button
         android:id="@+id/delete_crime_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/crime_delete_button"

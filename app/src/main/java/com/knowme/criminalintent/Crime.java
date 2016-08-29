@@ -13,6 +13,7 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private String mSuspect;
 
     public Crime() {
         this(UUID.randomUUID());
@@ -51,12 +52,21 @@ public class Crime {
         mSolved = solved;
     }
 
+    public String getSuspect() {
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
+    }
+
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(CrimeTable.Cols.UUID, getId().toString());
         values.put(CrimeTable.Cols.TITLE, getTitle());
         values.put(CrimeTable.Cols.DATE, getDate().getTime());
         values.put(CrimeTable.Cols.SOLVED, isSolved() ? 1 : 0);
+        values.put(CrimeTable.Cols.SUSPECT, getSuspect());
         return values;
     }
 }
