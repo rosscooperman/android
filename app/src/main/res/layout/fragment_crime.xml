@@ -72,10 +72,18 @@
         android:text="@string/crime_send_report_button"/>
 
     <Button
-        android:id="@+id/delete_crime_button"
+        android:id="@+id/call_suspect_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/call_suspect_button"/>
+
+    <Button
+        android:id="@+id/delete_crime_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/crime_delete_button"

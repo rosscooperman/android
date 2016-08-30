@@ -14,6 +14,7 @@ public class Crime {
     private Date mDate;
     private boolean mSolved;
     private String mSuspect;
+    private String mSuspectPhone;
 
     public Crime() {
         this(UUID.randomUUID());
@@ -60,6 +61,14 @@ public class Crime {
         mSuspect = suspect;
     }
 
+    public String getSuspectPhone() {
+        return mSuspectPhone;
+    }
+
+    public void setSuspectPhone(String suspectPhone) {
+        mSuspectPhone = suspectPhone;
+    }
+
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(CrimeTable.Cols.UUID, getId().toString());
@@ -67,6 +76,7 @@ public class Crime {
         values.put(CrimeTable.Cols.DATE, getDate().getTime());
         values.put(CrimeTable.Cols.SOLVED, isSolved() ? 1 : 0);
         values.put(CrimeTable.Cols.SUSPECT, getSuspect());
+        values.put(CrimeTable.Cols.SUSPECT_PHONE, getSuspectPhone());
         return values;
     }
 }
