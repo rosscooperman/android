@@ -23,6 +23,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -99,7 +100,7 @@ public class CrimeFragment extends Fragment {
             mPhotoView.setImageDrawable(null);
             mPhotoView.setEnabled(false);
         } else {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoView.getWidth(), mPhotoView.getHeight());
             mPhotoView.setImageBitmap(bitmap);
             mPhotoView.setEnabled(true);
         }
@@ -250,16 +251,20 @@ public class CrimeFragment extends Fragment {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
             }
         });
-        updatePhotoView();
+
+        ViewTreeObserver observer = mPhotoView.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                updatePhotoView();
+            }
+        });
 
         mPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PhotoPreviewFragment preview = PhotoPreviewFragment.newInstance(mPhotoFile);
                 preview.show(getFragmentManager(), DIALOG_PREVIEW);
-//                DatePickerFragment picker = DatePickerFragment.newInstance(mCrime.getDate());
-//                picker.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
-//                picker.show(getFragmentManager(), DIALOG_DATE);
             }
         });
 
