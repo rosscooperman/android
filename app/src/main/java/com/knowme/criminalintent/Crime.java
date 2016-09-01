@@ -69,6 +69,10 @@ public class Crime {
         mSuspectPhone = suspectPhone;
     }
 
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
+
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(CrimeTable.Cols.UUID, getId().toString());
