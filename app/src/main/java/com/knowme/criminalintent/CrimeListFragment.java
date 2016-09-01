@@ -1,6 +1,6 @@
 package com.knowme.criminalintent;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,11 +22,14 @@ import java.util.List;
 
 
 public class CrimeListFragment extends Fragment {
-    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    public interface Callbacks {
+        void onCrimeSelected(Crime crime);
+    }
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
     private Button mEmptyStateButton;
+    private Callbacks mCallbacks;
 
     @Nullable
     @Override
@@ -61,6 +64,18 @@ public class CrimeListFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks)context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         updateUI();
@@ -86,7 +101,9 @@ public class CrimeListFragment extends Fragment {
 
     private void updateSubtitle() {
         AppCompatActivity activity = (AppCompatActivity)getActivity();
-        activity.getSupportActionBar().setSubtitle(null);
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setSubtitle(null);
+        }
 
         CrimeLab lab = CrimeLab.get(getActivity());
         int count = lab.getCrimes().size();
@@ -100,11 +117,11 @@ public class CrimeListFragment extends Fragment {
         if (lab.getCrime(c.getId()) == null) {
             lab.addCrime(c);
         }
-        Intent intent = CrimePagerActivity.newIntent(getActivity(), c.getId());
-        startActivity(intent);
+        updateUI();
+        mCallbacks.onCrimeSelected(c);
     }
 
-    private void updateUI() {
+    public void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
@@ -131,7 +148,6 @@ public class CrimeListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
-        private int mListPosition;
 
         public CrimeHolder(View itemView) {
             super(itemView);
@@ -150,9 +166,8 @@ public class CrimeListFragment extends Fragment {
             itemView.setOnClickListener(this);
         }
 
-        public void bindCrime(Crime crime, int listPosition) {
+        public void bindCrime(Crime crime) {
             mCrime = crime;
-            mListPosition = listPosition;
 
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getDate().toString());
@@ -161,8 +176,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
-            startActivity(intent);
+            mCallbacks.onCrimeSelected(mCrime);
         }
     }
 
@@ -183,7 +197,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
             Crime crime = mCrimes.get(position);
-            holder.bindCrime(crime, position);
+            holder.bindCrime(crime);
         }
 
         @Override

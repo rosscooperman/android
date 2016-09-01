@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends AppCompatActivity implements CrimeFragment.Callbacks {
     private static final String EXTRA_CRIME_ID = "com.knowme.criminalintent.crime_id";
 
     private ViewPager mViewPager;
@@ -58,4 +58,7 @@ public class CrimePagerActivity extends AppCompatActivity {
         i.putExtra(EXTRA_CRIME_ID, crimeId);
         return i;
     }
+
+    @Override
+    public void onCrimeUpdated(Crime crime) {}
 }
