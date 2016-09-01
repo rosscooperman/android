@@ -11,16 +11,12 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.app.ShareCompat.IntentBuilder;
-import android.support.v4.content.ContentResolverCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +24,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -55,6 +53,8 @@ public class CrimeFragment extends Fragment {
     private Button mSendReportButton;
     private Button mCallSuspectButton;
     private Button mDeleteButton;
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
 
     private Intent pickContactIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 
@@ -113,6 +113,8 @@ public class CrimeFragment extends Fragment {
         mSendReportButton = (Button)v.findViewById(R.id.send_report_button);
         mCallSuspectButton = (Button)v.findViewById(R.id.call_suspect_button);
         mDeleteButton = (Button)v.findViewById(R.id.delete_crime_button);
+        mPhotoButton = (ImageButton)v.findViewById(R.id.crime_camera);
+        mPhotoView = (ImageView)v.findViewById(R.id.crime_photo);
 
         mTitleField.setText(mCrime.getTitle());
         mSolvedCheckBox.setChecked(mCrime.isSolved());
