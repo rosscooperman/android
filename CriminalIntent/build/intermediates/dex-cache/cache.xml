@@ -1,2 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.0_c6ed257b8e84acd7db9e2225d82ac0b1e842a786/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_5433c5853cbc53a17898299a05cf643f28e15104/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.0_e779f74c88c2766d53b8664972a3d2995a1c9e81/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="43392a92683fd8cfd3ba2f70e34e7a1384d35f06">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_568cfbc6ce08aa997f971630aa209b0b1433c488/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.0_5143e3034ef11f6abdf1cf38448fe0484b95a748/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.0_254b668c04ad16359d1c6b1d6cc7437473e3eaeb/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.0_dd1fe4428281ef251d72cf61a59cc185943d7951/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_4b1e5a421d8d2e52a5a712c75aac725220da097b/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.0_a5b9756072805755402e024a7248b4111e2dc23f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b8627d9a67d04a56201cc35e0acf9724554b57fb">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d140613eaa0ce2f5325d15ef105c59a2418688bb/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.0_5d97e4937608a4278c53253150f1cd0c501f7ce5/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.0_4799d315e5b1e110b139ad848266afb42fd06956/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_8e3672b87efad768e5611761097c296b79bc7429/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.0_b5802a9816e97791b5c554f15d7fe26097fe959a/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.0_bd8441421ca7caefe28ad4364b75420e653873a5/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_001582f0eb9ddb370adaf488b31452f5ca990d5f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.0_6c2c8d76df81962cbd9c8494a35199bda887e0f2/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/Users/ross/code/experiments/android/CriminalIntent/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_0e5e3882e34793b296251029cd838f628d21556f/classes.dex" />
+    </item>
+
+</items>
