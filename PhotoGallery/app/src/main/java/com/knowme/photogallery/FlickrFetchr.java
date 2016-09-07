@@ -3,9 +3,8 @@ package com.knowme.photogallery;
 import android.net.Uri;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -63,35 +62,19 @@ public class FlickrFetchr {
                     .appendQueryParameter("extras", "url_s")
                     .build()
                     .toString();
+
             String jsonString = getUrlString(url);
-            JSONObject jsonBody = new JSONObject(jsonString);
-            parseItems(items, jsonBody);
-        } catch (JSONException je) {
-            Log.e(TAG, "error parsing JSON", je);
+            Gson gson = new Gson();
+
+            JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
+            FlickrResults results = gson.fromJson(jsonObject.get("photos"), FlickrResults.class);
+            return results.getPhotos();
         } catch (IOException ioe) {
             Log.e(TAG, "error fetching flickr results", ioe);
+        } catch (Exception e) {
+            Log.e(TAG, "some other error", e);
         }
 
         return items;
-    }
-
-    private void parseItems(List<GalleryItem> items, JSONObject jsonBody) throws IOException, JSONException {
-        JSONObject photosJsonObject = jsonBody.getJSONObject("photos");
-        JSONArray photosJsonArray = photosJsonObject.getJSONArray("photo");
-
-        for (int i = 0; i < photosJsonArray.length(); i++) {
-            JSONObject photoJsonObject = photosJsonArray.getJSONObject(i);
-
-            GalleryItem item = new GalleryItem();
-            item.setId(photoJsonObject.getString("id"));
-            item.setCaption(photoJsonObject.getString("title"));
-
-            if (!photoJsonObject.has("url_s")) {
-                continue;
-            }
-
-            item.setUrl(photoJsonObject.getString("url_s"));
-            items.add(item);
-        }
     }
 }

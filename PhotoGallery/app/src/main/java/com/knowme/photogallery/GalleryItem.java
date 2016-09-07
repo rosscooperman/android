@@ -1,13 +1,11 @@
 package com.knowme.photogallery;
 
-import java.net.URL;
-import java.util.UUID;
-
+import com.google.gson.annotations.SerializedName;
 
 public class GalleryItem {
-    String mId;
-    String mCaption;
-    String mUrl;
+    private String mId;
+    @SerializedName("title") private String mCaption;
+    private String mUrl;
 
     @Override
     public String toString() {
