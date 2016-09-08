@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class GalleryItem {
     private String mId;
     @SerializedName("title") private String mCaption;
-    private String mUrl;
+    @SerializedName("url_s") private String mUrl;
 
     @Override
     public String toString() {
