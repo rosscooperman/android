@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.support.v4.util.LruCache;
 import android.util.Log;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class ThumbDownloader<T> extends HandlerThread {
     private ConcurrentMap<T,String> mRequestMap = new ConcurrentHashMap<>();
     private Handler mResponseHandler;
     private ThumbDownloadListener<T> mThumbDownloadListener;
+    private LruCache<String,Bitmap> mCache = new LruCache<>(50);
 
     public interface ThumbDownloadListener<T> {
         void onThumbnailDownloaded(T target, Bitmap thumbnail);
@@ -60,27 +62,35 @@ public class ThumbDownloader<T> extends HandlerThread {
         };
     }
 
+    private void postThumbnail(final String url, final T target, final Bitmap bitmap) {
+        mResponseHandler.post(new Runnable() {
+            public void run() {
+                if (mRequestMap.get(target) != url) {
+                    return;
+                }
+                mRequestMap.remove(target);
+                if (mThumbDownloadListener != null) {
+                    mThumbDownloadListener.onThumbnailDownloaded(target, bitmap);
+                }
+            }
+        });
+    }
+
     private void handleRequest(final T target) {
         try {
-            final String url = mRequestMap.get(target);
+            String url = mRequestMap.get(target);
             if (url == null) {
                 return;
             }
 
-            byte[] bitmapBytes = new FlickrFetchr().getUrlBytes(url);
-            final Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
-
-            if (mThumbDownloadListener != null) {
-                mResponseHandler.post(new Runnable() {
-                    public void run() {
-                        if (mRequestMap.get(target) != url) {
-                            return;
-                        }
-                        mRequestMap.remove(target);
-                        mThumbDownloadListener.onThumbnailDownloaded(target, bitmap);
-                    }
-                });
+            Bitmap bitmap = mCache.get(url);
+            if (bitmap == null) {
+                byte[] bitmapBytes = new FlickrFetchr().getUrlBytes(url);
+                bitmap = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+                mCache.put(url, bitmap);
             }
+
+            postThumbnail(url, target, bitmap);
         } catch (IOException ioe) {
             Log.e(TAG, "error downloading image", ioe);
         }
