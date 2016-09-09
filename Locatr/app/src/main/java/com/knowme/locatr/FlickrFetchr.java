@@ -28,7 +28,7 @@ public class FlickrFetchr {
             .appendQueryParameter("api_key", "393f42d3cd3708736989701f042b3949")
             .appendQueryParameter("format", "json")
             .appendQueryParameter("nojsoncallback", "1")
-            .appendQueryParameter("extras", "url_s")
+            .appendQueryParameter("extras", "url_s,geo")
             .build();
 
     public byte[] getUrlBytes(String urlSpec) throws IOException {
