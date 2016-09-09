@@ -1,6 +1,7 @@
 package com.knowme.photogallery;
 
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
@@ -10,13 +11,17 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.SystemClock;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.NotificationCompat;
 
 import java.util.List;
 
 public class PollService extends IntentService {
     private static final String TAG = "PollService";
+
+    public static final String ACTION_SHOW_NOTIFICATION = "com.knowme.photogallery.SHOW_NOTIFICATION";
+    public static final String PERM_PRIVATE = "com.knowme.photogallery.PRIVATE";
+    public static final String REQUEST_CODE = "REQUEST_CODE";
+    public static final String NOTIFICATION = "NOTIFICATION";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, PollService.class);
@@ -33,11 +38,13 @@ public class PollService extends IntentService {
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
         if (isOn) {
-            am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pi);
+            am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 1000 * 60, pi);
         } else {
             am.cancel(pi);
             pi.cancel();
         }
+
+        QueryPreferences.setAlarmOn(context, isOn);
     }
 
     public static boolean isServiceAlarmOn(Context context) {
@@ -68,7 +75,7 @@ public class PollService extends IntentService {
         }
 
         String resultId = items.get(0).getId();
-        if (lastId == null || resultId == null || resultId.equals(lastId)) {
+        if (lastId == null || resultId == null || !resultId.equals(lastId)) {
             QueryPreferences.setLastResultId(this, resultId);
 
             Resources resources = getResources();
@@ -84,8 +91,15 @@ public class PollService extends IntentService {
                     .setAutoCancel(true)
                     .build();
 
-            NotificationManagerCompat.from(this).notify(0, notification);
+            showBackgroundNotification(0, notification);
         }
+    }
+
+    private void showBackgroundNotification(int requestCode, Notification notification) {
+        Intent i = new Intent(ACTION_SHOW_NOTIFICATION);
+        i.putExtra(REQUEST_CODE, requestCode);
+        i.putExtra(NOTIFICATION, notification);
+        sendOrderedBroadcast(i, PERM_PRIVATE, null, null, Activity.RESULT_OK, null, null);
     }
 
     private boolean isNetworkAvailableAndConnected() {
