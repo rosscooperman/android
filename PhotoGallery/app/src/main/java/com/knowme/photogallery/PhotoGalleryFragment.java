@@ -1,6 +1,7 @@
 package com.knowme.photogallery;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -157,16 +158,29 @@ public class PhotoGalleryFragment extends VisibleFragment {
         }
     }
 
-    private class PhotoHolder extends RecyclerView.ViewHolder {
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView mImageView;
+        private GalleryItem mGalleryItem;
 
         public PhotoHolder(View itemView) {
             super(itemView);
             mImageView = (ImageView)itemView.findViewById(R.id.fragment_photo_gallery_image_view);
+            itemView.setOnClickListener(this);
         }
 
         public void bindDrawable(Drawable drawable) {
             mImageView.setImageDrawable(drawable);
+        }
+
+        public void bindGalleryItem(GalleryItem item) {
+            bindDrawable(null);
+            mGalleryItem = item;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent i = PhotoPageActivity.newIntent(getActivity(), mGalleryItem.getPhotoPageUri());
+            startActivity(i);
         }
     }
 
@@ -189,7 +203,7 @@ public class PhotoGalleryFragment extends VisibleFragment {
         public void onBindViewHolder(PhotoHolder holder, int position) {
             GalleryItem item = mGalleryItems.get(position);
             mDownloader.queueThumbnail(holder, item.getUrl());
-            holder.bindDrawable(null);
+            holder.bindGalleryItem(item);
         }
 
         @Override
